@@ -1,0 +1,86 @@
+INFO:     Started server process [43594]
+INFO:     Waiting for application startup.
+2025-08-11 10:31:34,619 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-08-11 10:31:34,619 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("post")
+2025-08-11 10:31:34,619 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-08-11 10:31:34,620 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("comment")
+2025-08-11 10:31:34,620 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-08-11 10:31:34,620 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("like")
+2025-08-11 10:31:34,620 INFO sqlalchemy.engine.Engine [raw sql] ()
+2025-08-11 10:31:34,620 INFO sqlalchemy.engine.Engine COMMIT
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     151.253.28.68:0 - "GET / HTTP/1.1" 200 OK
+2025-08-11 10:31:59,369 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-08-11 10:31:59,372 INFO sqlalchemy.engine.Engine SELECT post.id, post.username, post.content, post.created_at, post.updated_at, post.likes_count, post.comments_count 
+FROM post
+2025-08-11 10:31:59,372 INFO sqlalchemy.engine.Engine [generated in 0.00014s] ()
+2025-08-11 10:31:59,373 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:49346 - "GET /api/posts HTTP/1.1" 200 OK
+2025-08-11 10:32:21,895 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-08-11 10:32:21,897 INFO sqlalchemy.engine.Engine INSERT INTO post (id, username, content, created_at, updated_at, likes_count, comments_count) VALUES (?, ?, ?, ?, ?, ?, ?)
+2025-08-11 10:32:21,897 INFO sqlalchemy.engine.Engine [generated in 0.00025s] ('ffd1bf28-e6df-4f43-b410-a4767cf414e2', 'john_doe', 'My first post about outdoor adventures!', '2025-08-11 10:32:21.895139', '2025-08-11 10:32:21.895152', 0, 0)
+2025-08-11 10:32:21,898 INFO sqlalchemy.engine.Engine COMMIT
+2025-08-11 10:32:21,901 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-08-11 10:32:21,903 INFO sqlalchemy.engine.Engine SELECT post.id, post.username, post.content, post.created_at, post.updated_at, post.likes_count, post.comments_count 
+FROM post 
+WHERE post.id = ?
+2025-08-11 10:32:21,903 INFO sqlalchemy.engine.Engine [generated in 0.00012s] ('ffd1bf28-e6df-4f43-b410-a4767cf414e2',)
+2025-08-11 10:32:21,904 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:51832 - "POST /api/posts HTTP/1.1" 201 Created
+INFO:     151.253.28.68:0 - "GET / HTTP/1.1" 200 OK
+INFO:     151.253.28.68:0 - "GET / HTTP/1.1" 200 OK
+INFO:     151.253.28.68:0 - "GET / HTTP/1.1" 200 OK
+2025-08-11 10:32:44,575 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-08-11 10:32:44,576 INFO sqlalchemy.engine.Engine SELECT post.id, post.username, post.content, post.created_at, post.updated_at, post.likes_count, post.comments_count 
+FROM post
+2025-08-11 10:32:44,576 INFO sqlalchemy.engine.Engine [cached since 45.2s ago] ()
+2025-08-11 10:32:44,576 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:60640 - "GET /api/posts HTTP/1.1" 200 OK
+INFO:     151.253.28.68:0 - "GET / HTTP/1.1" 200 OK
+email-validator not installed, email fields will be treated as str.
+To install, run: pip install email-validator
+INFO:     127.0.0.1:43648 - "GET /openapi.json HTTP/1.1" 200 OK
+2025-08-11 10:33:31,685 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-08-11 10:33:31,686 INFO sqlalchemy.engine.Engine SELECT post.id AS post_id, post.username AS post_username, post.content AS post_content, post.created_at AS post_created_at, post.updated_at AS post_updated_at, post.likes_count AS post_likes_count, post.comments_count AS post_comments_count 
+FROM post 
+WHERE post.id = ?
+2025-08-11 10:33:31,686 INFO sqlalchemy.engine.Engine [generated in 0.00014s] ('ffd1bf28-e6df-4f43-b410-a4767cf414e2',)
+2025-08-11 10:33:31,687 INFO sqlalchemy.engine.Engine INSERT INTO comment (id, post_id, username, content, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)
+2025-08-11 10:33:31,687 INFO sqlalchemy.engine.Engine [generated in 0.00019s] ('d5e15bbe-7b5b-422e-b372-e29df9a20665', 'ffd1bf28-e6df-4f43-b410-a4767cf414e2', 'jane_smith', 'Great post! Love outdoor adventures too!', '2025-08-11 10:33:31.686725', '2025-08-11 10:33:31.686737')
+2025-08-11 10:33:31,689 INFO sqlalchemy.engine.Engine UPDATE post SET comments_count=? WHERE post.id = ?
+2025-08-11 10:33:31,689 INFO sqlalchemy.engine.Engine [generated in 0.00011s] (1, 'ffd1bf28-e6df-4f43-b410-a4767cf414e2')
+2025-08-11 10:33:31,689 INFO sqlalchemy.engine.Engine COMMIT
+2025-08-11 10:33:31,693 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-08-11 10:33:31,693 INFO sqlalchemy.engine.Engine SELECT comment.id, comment.post_id, comment.username, comment.content, comment.created_at, comment.updated_at 
+FROM comment 
+WHERE comment.id = ?
+2025-08-11 10:33:31,693 INFO sqlalchemy.engine.Engine [generated in 0.00014s] ('d5e15bbe-7b5b-422e-b372-e29df9a20665',)
+2025-08-11 10:33:31,694 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:48320 - "POST /api/posts/ffd1bf28-e6df-4f43-b410-a4767cf414e2/comments HTTP/1.1" 201 Created
+2025-08-11 10:33:43,594 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-08-11 10:33:43,594 INFO sqlalchemy.engine.Engine SELECT post.id AS post_id, post.username AS post_username, post.content AS post_content, post.created_at AS post_created_at, post.updated_at AS post_updated_at, post.likes_count AS post_likes_count, post.comments_count AS post_comments_count 
+FROM post 
+WHERE post.id = ?
+2025-08-11 10:33:43,594 INFO sqlalchemy.engine.Engine [cached since 11.91s ago] ('ffd1bf28-e6df-4f43-b410-a4767cf414e2',)
+2025-08-11 10:33:43,596 INFO sqlalchemy.engine.Engine SELECT "like".id, "like".post_id, "like".username, "like".liked_at 
+FROM "like" 
+WHERE "like".post_id = ? AND "like".username = ?
+2025-08-11 10:33:43,596 INFO sqlalchemy.engine.Engine [generated in 0.00013s] ('ffd1bf28-e6df-4f43-b410-a4767cf414e2', 'mike_wilson')
+2025-08-11 10:33:43,597 INFO sqlalchemy.engine.Engine INSERT INTO "like" (id, post_id, username, liked_at) VALUES (?, ?, ?, ?)
+2025-08-11 10:33:43,597 INFO sqlalchemy.engine.Engine [generated in 0.00012s] ('ddd0e467-7d02-4da2-8bb3-8ca39475b5f1', 'ffd1bf28-e6df-4f43-b410-a4767cf414e2', 'mike_wilson', '2025-08-11 10:33:43.596636')
+2025-08-11 10:33:43,598 INFO sqlalchemy.engine.Engine UPDATE post SET likes_count=? WHERE post.id = ?
+2025-08-11 10:33:43,598 INFO sqlalchemy.engine.Engine [generated in 0.00011s] (1, 'ffd1bf28-e6df-4f43-b410-a4767cf414e2')
+2025-08-11 10:33:43,598 INFO sqlalchemy.engine.Engine COMMIT
+2025-08-11 10:33:43,602 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2025-08-11 10:33:43,602 INFO sqlalchemy.engine.Engine SELECT "like".id, "like".post_id, "like".username, "like".liked_at 
+FROM "like" 
+WHERE "like".id = ?
+2025-08-11 10:33:43,602 INFO sqlalchemy.engine.Engine [generated in 0.00011s] ('ddd0e467-7d02-4da2-8bb3-8ca39475b5f1',)
+2025-08-11 10:33:43,603 INFO sqlalchemy.engine.Engine ROLLBACK
+INFO:     127.0.0.1:40806 - "POST /api/posts/ffd1bf28-e6df-4f43-b410-a4767cf414e2/likes HTTP/1.1" 201 Created
+INFO:     151.253.28.68:0 - "GET / HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [43594]
